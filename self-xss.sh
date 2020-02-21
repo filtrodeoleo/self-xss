@@ -1,5 +1,5 @@
 #!/bin/bash
-# Self-XSS v1.0
+# Self-XSS v1.1
 # coded by: github.com/thelinuxchoice/self-xss
 # Twitter: @linux_choice
 # Disclaimer: Attacking targets without prior mutual consent is illegal.
@@ -20,7 +20,7 @@ printf " \e[1;77m   _____ ________    ______  \e[0m\e[91m _  ____________ \e[0m\
 printf " \e[1;77m  / ___// ____/ /   / ____/  \e[0m\e[91m| |/ / ___/ ___/ \e[0m\n"
 printf ' \e[1;77m  \__ \/ __/ / /   / /_______\e[0m\e[91m|   /\__ \'$lazy''$lazy'__ \  \e[0m\n'
 printf " \e[1;77m ___/ / /___/ /___/ __/_____/\e[0m\e[91m   |___/ /__/ /  \e[0m\n"
-printf " \e[1;77m/____/_____/_____/_/       \e[0m\e[91m/_/|_/____/____/\e[0m\e[1;77mv1.0   \e[0m\n"
+printf " \e[1;77m/____/_____/_____/_/       \e[0m\e[91m/_/|_/____/____/\e[0m\e[1;77mv1.1   \e[0m\n"
                                              
 
 printf "\e[1;77m by github.com/thelinuxchoice/self-xss\e[0m \n"
@@ -153,7 +153,7 @@ printf "\e[1;92m[\e[0m+\e[1;92m] Downloading Ngrok...\n"
 arch=$(uname -a | grep -o 'arm' | head -n1)
 arch2=$(uname -a | grep -o 'Android' | head -n1)
 if [[ $arch == *'arm'* ]] || [[ $arch2 == *'Android'* ]] ; then
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
+wget --no-check-certificate https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
 
 if [[ -e ngrok-stable-linux-arm.zip ]]; then
 unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1
@@ -165,7 +165,7 @@ exit 1
 fi
 
 else
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
+wget --no-check-certificate https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
 if [[ -e ngrok-stable-linux-386.zip ]]; then
 unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
 chmod +x ngrok
